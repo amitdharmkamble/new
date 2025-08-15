@@ -1,1 +1,92 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Indian Flag Animation - Theatre.js</title>
+  <style>
+    body {
+      background: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      padding-top: 20px;
+    }
+    svg {
+      width: 600px;
+      height: auto;
+    }
+  </style>
+</head>
+  <!-- Theatre.js Core + Studio via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@theatre/core@0.7.0/dist/core.umd.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@theatre/studio@0.7.0/dist/studio.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/theatre@0.2.3/index.min.js"></script>
+
+
+
+<script>
+    // Initialize Theatre.js Studio
+    TheatreStudio.initialize()
+
+    const { core, studio } = Theatre
+    const project = Theatre.getProject("Indian Flag Animation")
+    const sheet = project.sheet("Scene")
+
+    // Chakra group (outer + spokes)
+    const chakraOuter = document.getElementById("chakraOuter")
+    const chakraCenter = document.getElementById("chakraCenter")
+
+    const chakraObj = sheet.object("Chakra", {
+      rotation: 0,
+      stroke: "#07038D"
+    })
+
+    chakraObj.onValuesChange((v) => {
+      chakraOuter.setAttribute("transform", `rotate(${v.rotation}, 0, 0)`)
+      chakraCenter.setAttribute("transform", `rotate(${v.rotation}, 0, 0)`)
+      chakraOuter.setAttribute("fill", v.stroke)
+      chakraCenter.setAttribute("fill", v.stroke)
+    })
+
+    // Animate stripes too
+    const saffron = document.getElementById("saffron")
+    const green = document.getElementById("green")
+
+    const stripesObj = sheet.object("Stripes", {
+      saffron: "#FF6820",
+      green: "#046A38"
+    })
+
+    stripesObj.onValuesChange((v) => {
+      saffron.setAttribute("fill", v.saffron)
+      green.setAttribute("fill", v.green)
+    })
+  </script>
+<body>
+  <!-- Full SVG Flag -->
+  <svg id="flag" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="600" viewBox="-45 -30 90 60" fill="#07038D">
+    <title>Flag of India</title>
+    <path id="saffron" fill="#FF6820" d="m-45-30h90v20h-90z"/>
+    <path id="white" fill="#FFF" d="m-45-10h90v20h-90z"/>
+    <path id="green" fill="#046A38" d="m-45 10h90v20h-90z"/>
+    <circle id="chakraOuter" r="9.25"/>
+    <circle fill="#FFF" r="8"/>
+    <circle id="chakraCenter" r="1.6"/>
+    <g id="d">
+      <g id="c">
+        <g id="b">
+          <g id="a">
+            <path d="m0-8 .3 4.81409L0-.80235-.3-3.18591z"/>
+            <circle transform="rotate(7.5)" r="0.35" cy="-8"/>
+          </g>
+          <use xlink:href="#a" transform="scale(-1)"/>
+        </g>
+        <use xlink:href="#b" transform="rotate(15)"/>
+      </g>
+      <use xlink:href="#c" transform="rotate(30)"/>
+    </g>
+    <use xlink:href="#d" transform="rotate(60)"/>
+    <use xlink:href="#d" transform="rotate(120)"/>
+  </svg>
+</body>
+</html>
