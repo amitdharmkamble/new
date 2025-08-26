@@ -17,51 +17,6 @@
     }
   </style>
 </head>
-  <!-- Theatre.js Core + Studio via CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/@theatre/core@0.7.0/dist/core.umd.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@theatre/studio@0.7.0/dist/studio.umd.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/theatre@0.2.3/index.min.js"></script>
-
-
-
-<script>
-    // Initialize Theatre.js Studio
-    TheatreStudio.initialize()
-
-    const { core, studio } = Theatre
-    const project = Theatre.getProject("Indian Flag Animation")
-    const sheet = project.sheet("Scene")
-
-    // Chakra group (outer + spokes)
-    const chakraOuter = document.getElementById("chakraOuter")
-    const chakraCenter = document.getElementById("chakraCenter")
-
-    const chakraObj = sheet.object("Chakra", {
-      rotation: 0,
-      stroke: "#07038D"
-    })
-
-    chakraObj.onValuesChange((v) => {
-      chakraOuter.setAttribute("transform", `rotate(${v.rotation}, 0, 0)`)
-      chakraCenter.setAttribute("transform", `rotate(${v.rotation}, 0, 0)`)
-      chakraOuter.setAttribute("fill", v.stroke)
-      chakraCenter.setAttribute("fill", v.stroke)
-    })
-
-    // Animate stripes too
-    const saffron = document.getElementById("saffron")
-    const green = document.getElementById("green")
-
-    const stripesObj = sheet.object("Stripes", {
-      saffron: "#FF6820",
-      green: "#046A38"
-    })
-
-    stripesObj.onValuesChange((v) => {
-      saffron.setAttribute("fill", v.saffron)
-      green.setAttribute("fill", v.green)
-    })
-  </script>
 <body>
   <!-- Full SVG Flag -->
   <svg id="flag" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="900" height="600" viewBox="-45 -30 90 60" fill="#07038D">
